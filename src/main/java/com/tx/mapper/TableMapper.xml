@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tx.dao.TableDao">
+    <resultMap id="table" type="com.tx.model.Table" autoMapping="true">
+
+    </resultMap>
+    
+    <resultMap id="column" type="com.tx.model.Column" autoMapping="true">
+        
+    </resultMap>
+    
+    <select id="queryTable" resultMap="table">
+        select TABLE_SCHEMA as databaseName, `TABLE_NAME` as tableName, TABLE_COMMENT as comment, CREATE_TIME as createTime, UPDATE_TIME as updateTime from information_schema.`TABLES`
+        where TABLE_SCHEMA = (SELECT DATABASE())
+        <if test="tableNames != null">
+            and `TABLE_NAME` in
+            <foreach collection="tableNames" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="queryColumn" resultMap="column">
+        select TABLE_SCHEMA as databaseName,`TABLE_NAME` as tableName,`COLUMN_NAME` as columnName ,DATA_TYPE as dataType, IS_NULLABLE as isNullable,
+        COLUMN_TYPE as columnType, EXTRA as extra, COLUMN_KEY as indexKey,COLUMN_COMMENT as comment, COLUMN_TYPE as columnType, IFNULL(CHARACTER_MAXIMUM_LENGTH, 0) as textLength
+        from information_schema.`COLUMNS`
+        <where>
+            TABLE_SCHEMA = (SELECT DATABASE())
+            <if test="tableName != null and tableName != ''">
+                and `TABLE_NAME` = #{tableName}
+            </if>
+        </where>
+        order by ordinal_position;
+    </select>
+
+</mapper>

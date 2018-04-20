@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>改成你的系统名称</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap/bootstrap.min.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/static/css/font-awesome.min.css}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{/static/css/ionicons.min.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/static/adminlte/AdminLTE.min.css}">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" th:href="@{/static/css/_all-skins.min.css}">
+
+    <link rel="stylesheet" th:href="@{/static/css/iCheck-all.css}">
+    <link rel="stylesheet" th:href="@{/static/css/local/local.css}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet" th:href="@{/static/css/google-apis-fonts.css}">
+
+    <!-- jQuery 3 -->
+    <script th:src="@{/static/jQuery/jquery.min.js}"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script th:src="@{/static/bootstrap/bootstrap.min.js}"></script>
+    <!-- SlimScroll -->
+    <script th:src="@{/static/jQuery/jquery.slimscroll.min.js}"></script>
+    <!-- FastClick -->
+    <script th:src="@{/static/js/fastclick.js}"></script>
+    <script th:src="@{/static/js/icheck.min.js}"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/static/adminlte/adminlte.min.js}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script th:src="@{/static/adminlte/demo.js}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.sidebar-menu').tree();
+
+            //iCheck for checkbox and radio inputs
+            $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                checkboxClass: 'icheckbox_minimal-blue',
+                radioClass   : 'iradio_minimal-blue'
+            });
+            //Red color scheme for iCheck
+            $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                checkboxClass: 'icheckbox_minimal-red',
+                radioClass   : 'iradio_minimal-red'
+            });
+            //Flat red color scheme for iCheck
+            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass   : 'iradio_flat-green'
+            });
+        })
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

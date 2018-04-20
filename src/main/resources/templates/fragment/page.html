@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<!--普通分页-->
+<div class="row" th:fragment="page">
+<nav aria-label="Page navigation">
+    <ul class="pagination pull-right" style="margin-right: 25px">
+        <th:block th:with="url=${#httpServletRequest.getRequestURI()}">
+            <li><a th:text="'总共' + ${pageBean.total} + '条'"></a></li>
+            <li th:if="${pageBean.pageCount > 0}"><a th:href="${url}+ '?page=1'">首页</a></li>
+            <li th:if="${pageBean.pageCount > 0}">
+                <a th:href="${pageBean.current} > 1 ? ${url} + '?page=' + (${pageBean.current} - 1) : ${url}+ '?page=1'" aria-label="Previous">
+                    <span aria-hidden="true"><i class="fa fa-angle-double-left"></i>&nbsp;上一页</span>
+                </a>
+            </li>
+            <th:block th:if="${pageBean.pageCount > 0}" th:each="num : ${#numbers.sequence(pageBean.start, pageBean.end)}">
+                <li th:class="${pageBean.current == num} ?'active' : ''"><a th:href="${url} + '?page=' + ${num}" th:text="${num}"></a></li>
+            </th:block>
+            <li th:if="${pageBean.pageCount > 0}">
+                <a th:href="${url} + '?page=' + (${pageBean.current >= pageBean.end} ? ${pageBean.end} : ${pageBean.current} + 1)" aria-label="Next">
+                    <span aria-hidden="true">下一页&nbsp;<i class="fa fa-angle-double-right"></i></span>
+                </a>
+            </li>
+            <li th:if="${pageBean.pageCount > 0}"><a th:href="${url} + '?page=' + ${pageBean.pageCount}">尾页</a></li>
+        </th:block>
+    </ul>
+</nav>
+</div>
+
+<!--普通分页-->
+<div class="row" th:fragment="mpage">
+<nav aria-label="Page navigation">
+    <ul class="pagination pull-right" style="margin-right: 25px">
+        <th:block th:with="url=${#httpServletRequest.getRequestURI()}">
+            <li><a th:text="'共' + ${pageBean.total} + '条'"></a></li>
+            <li th:if="${pageBean.pageCount > 0}"><a th:href="${url}+ '?page=1'">首页</a></li>
+            <li th:if="${pageBean.pageCount > 0}">
+                <a th:href="${pageBean.current} > 1 ? ${url} + '?page=' + (${pageBean.current} - 1) : ${url}+ '?page=1'" aria-label="Previous">
+                    <span aria-hidden="true">上一页</span>
+                </a>
+            </li>
+            <li th:if="${pageBean.pageCount > 0}">
+                <a th:href="${url} + '?page=' + (${pageBean.current >= pageBean.end} ? ${pageBean.end} : ${pageBean.current} + 1)" aria-label="Next">
+                    <span aria-hidden="true">下一页</i></span>
+                </a>
+            </li>
+            <li th:if="${pageBean.pageCount > 0}"><a th:href="${url} + '?page=' + ${pageBean.pageCount}">尾页</a></li>
+        </th:block>
+    </ul>
+</nav>
+</div>
+
+<!--带from的post分页-->
+<div class="row" th:fragment="pageForm(formId)">
+<nav aria-label="Page navigation">
+    <script>
+        function page(pageNum, formId) {
+
+            var theForm = document.getElementById(formId);
+            theForm.action = theForm.action + "?page="+pageNum;
+            theForm.submit();
+        }
+    </script>
+    <ul class="pagination pull-right" style="margin-right: 25px">
+        <th:block th:with="url=${#httpServletRequest.getRequestURI()}">
+            <li><a th:text="'总共' + ${pageBean.total} + '条'"></a></li>
+            <li th:if="${pageBean.pageCount > 0}"><a th:href="'javascript:page(1, \''+ ${formId} +'\')'">首页</a></li>
+            <li th:if="${pageBean.pageCount > 0}">
+                <a th:href="'javascript:page(' + (${pageBean.current} > 1 ? (${pageBean.current} - 1) : 1)  +',' + '\''+ ${formId} + '\'' +')'" aria-label="Previous">
+                    <span aria-hidden="true"><i class="fa fa-angle-double-left"></i>&nbsp;上一页</span>
+                </a>
+            </li>
+            <th:block th:if="${pageBean.pageCount > 0}" th:each="num : ${#numbers.sequence(pageBean.start, pageBean.end)}">
+                <li th:class="${pageBean.current == num} ?'active' : ''"><a th:href="'javascript:page(' + ${num}  +',' + '\''+ ${formId} + '\'' +')'" th:text="${num}"></a></li>
+            </th:block>
+            <li th:if="${pageBean.pageCount > 0}">
+                <a th:href="'javascript:page(' + (${pageBean.current >= pageBean.end} ? ${pageBean.end} : ${pageBean.current} + 1) +',' + '\'' + ${formId} + '\'' + ')'" aria-label="Next">
+                    <span aria-hidden="true">下一页&nbsp;<i class="fa fa-angle-double-right"></i></span>
+                </a>
+            </li>
+            <li th:if="${pageBean.pageCount > 0}"><a th:href="'javascript:page(' + ${pageBean.pageCount} +',' + '\'' + ${formId} + '\'' + ')'">尾页</a></li>
+        </th:block>
+    </ul>
+</nav>
+</div>
+
+</body>
+</html>
