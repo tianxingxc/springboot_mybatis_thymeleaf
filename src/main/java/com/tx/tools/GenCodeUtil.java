@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -87,7 +88,7 @@ public class GenCodeUtil {
         String destDir = destOutputDir + "/" + projectName;
 
         cfg.setDirectoryForTemplateLoading(templatesDir);
-        cfg.setDefaultEncoding("UTF-8");
+        cfg.setDefaultEncoding("utf-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
         String packagePath = basePackageName.replace(".", "/");
@@ -269,7 +270,7 @@ public class GenCodeUtil {
         }
 
         cfg.setDirectoryForTemplateLoading(templatesDir);
-        cfg.setDefaultEncoding("UTF-8");
+        cfg.setDefaultEncoding("utf-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
         String packagePath = basePackageName.replace(".", "/");
@@ -288,7 +289,7 @@ public class GenCodeUtil {
         StringWriter out = new StringWriter();
         tpl.process(root, out);
         zipOutputStream.putNextEntry(new ZipEntry(fileName));
-        zipOutputStream.write(out.toString().getBytes("utf-8"));
+        zipOutputStream.write(out.toString().getBytes(StandardCharsets.UTF_8));
         zipOutputStream.closeEntry();
         out.close();
 
@@ -304,7 +305,7 @@ public class GenCodeUtil {
         out = new StringWriter();
         tpl.process(root, out);
         zipOutputStream.putNextEntry(new ZipEntry(fileName));
-        zipOutputStream.write(out.toString().getBytes("utf-8"));
+        zipOutputStream.write(out.toString().getBytes(StandardCharsets.UTF_8));
         zipOutputStream.closeEntry();
         out.close();
 
@@ -314,7 +315,7 @@ public class GenCodeUtil {
         out = new StringWriter();
         tpl.process(root, out);
         zipOutputStream.putNextEntry(new ZipEntry(fileName));
-        zipOutputStream.write(out.toString().getBytes("utf-8"));
+        zipOutputStream.write(out.toString().getBytes(StandardCharsets.UTF_8));
         zipOutputStream.closeEntry();
         out.close();
 
@@ -325,7 +326,7 @@ public class GenCodeUtil {
         out = new StringWriter();
         tpl.process(root, out);
         zipOutputStream.putNextEntry(new ZipEntry(offsetFileName));
-        zipOutputStream.write(out.toString().getBytes("utf-8"));
+        zipOutputStream.write(out.toString().getBytes(StandardCharsets.UTF_8));
         zipOutputStream.closeEntry();
         out.close();
 
@@ -334,7 +335,7 @@ public class GenCodeUtil {
         out = new StringWriter();
         tpl.process(root, out);
         zipOutputStream.putNextEntry(new ZipEntry(pageFileName));
-        zipOutputStream.write(out.toString().getBytes("utf-8"));
+        zipOutputStream.write(out.toString().getBytes(StandardCharsets.UTF_8));
         zipOutputStream.closeEntry();
         out.close();
 
@@ -364,7 +365,7 @@ public class GenCodeUtil {
                     temp.process(root, out);
 
                     zipOutputStream.putNextEntry(new ZipEntry(fileName));
-                    zipOutputStream.write(out.toString().getBytes("utf-8"));
+                    zipOutputStream.write(out.toString().getBytes(StandardCharsets.UTF_8));
                     zipOutputStream.closeEntry();
                     continue;
                 }
@@ -385,7 +386,7 @@ public class GenCodeUtil {
                 temp.process(root, out);
 
                 zipOutputStream.putNextEntry(new ZipEntry(fileName));
-                zipOutputStream.write(out.toString().getBytes("utf-8"));
+                zipOutputStream.write(out.toString().getBytes(StandardCharsets.UTF_8));
                 zipOutputStream.closeEntry();
                 out.close();
             }
