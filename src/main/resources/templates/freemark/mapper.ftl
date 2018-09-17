@@ -12,7 +12,7 @@
         </#list>
     </resultMap>
 
-    <select id="list${table.className}" resultMap="${table.instanceName}">
+    <select id="list${table.className}" resultMap="${table.instanceName}" parameterType="${packageName}.model.${table.className}">
         select * from ${table.tableName} t
         <if test="${table.instanceName} != null">
             <where>
